@@ -3,20 +3,118 @@
  * – file nội bộ đặt trong public/images/ (ví dụ '/images/cover.jpg')
  * – hoặc dùng link ngoài (ví dụ 'https://cdn.example.com/cover.jpg').
  */
+
 export const IMAGES = {
-  logoIcon: '/images/logo-icon.png',        // Chữ M (ô bo góc) – chuyển động 3D khi click, ~1.2:1
-  logoText: '/images/logo-text.png',        // Chữ "MicroTech" – đứng yên, chỉ nổi lên khi click/hover, nền trong suốt
-  cover: '/images/cover.jpg',               // Ảnh bìa NGUYÊN BANNER (~1940x810, tỉ lệ 2.4:1) gồm cả chữ & nút. Nếu đổi ảnh, chỉnh lại vị trí nút bấm: CONFIG.coverCta trong src/config.ts
-  iconSupport: '/images/icon-support.svg',  // Thẻ nổi "Hỗ trợ từ xa"
-  iconInstall: '/images/icon-install.svg',  // Dịch vụ: Cài phần mềm
-  iconFix: '/images/icon-fix.svg',          // Dịch vụ: Xử lý lỗi
-  iconIt: '/images/icon-it.svg',            // Dịch vụ: IT Support
-  iconBusiness: '/images/icon-business.svg',// Dịch vụ: Doanh nghiệp
-  whyQuote: '/images/why-quote.svg',        // Vì sao chọn: Báo giá trước
-  whySecure: '/images/why-secure.svg',      // Vì sao chọn: Bảo mật thông tin
-  whyRemote: '/images/why-remote.svg',      // Vì sao chọn: Hỗ trợ từ xa
+  logoIcon: '/images/logo-icon.png',
+  logoText: '/images/logo-text.png',
+  cover: '/images/cover.jpg',
+
+  iconSupport: '/images/icon-support.svg',
+  iconInstall: '/images/icon-install.svg',
+  iconFix: '/images/icon-fix.svg',
+  iconIt: '/images/icon-it.svg',
+  iconBusiness: '/images/icon-business.svg',
+
+  whyQuote: '/images/why-quote.svg',
+  whySecure: '/images/why-secure.svg',
+  whyRemote: '/images/why-remote.svg',
+
   socialFacebook: '/images/social-facebook.svg',
   socialYoutube: '/images/social-youtube.svg',
   socialZalo: '/images/icons8-zalo-100.png',
 } as const
+
 export type ImageKey = keyof typeof IMAGES
+
+/**
+ * Ảnh mặc định.
+ * Settings.tsx dùng object này khi người dùng chưa upload ảnh tùy chỉnh.
+ */
+export const DEFAULT_SRC: Record<ImageKey, string> = {
+  ...IMAGES,
+}
+
+/**
+ * Danh sách ảnh xuất hiện trong trang Settings.
+ *
+ * max = kích thước file tối đa tính theo byte.
+ */
+export const IMAGE_SLOTS: Array<{
+  key: ImageKey
+  label: string
+  max: number
+}> = [
+  {
+    key: 'logoIcon',
+    label: 'Logo biểu tượng',
+    max: 500_000,
+  },
+  {
+    key: 'logoText',
+    label: 'Logo MicroTech',
+    max: 800_000,
+  },
+  {
+    key: 'cover',
+    label: 'Ảnh cover',
+    max: 3_000_000,
+  },
+
+  {
+    key: 'iconSupport',
+    label: 'Icon hỗ trợ từ xa',
+    max: 500_000,
+  },
+  {
+    key: 'iconInstall',
+    label: 'Icon cài phần mềm',
+    max: 500_000,
+  },
+  {
+    key: 'iconFix',
+    label: 'Icon xử lý lỗi',
+    max: 500_000,
+  },
+  {
+    key: 'iconIt',
+    label: 'Icon IT Support',
+    max: 500_000,
+  },
+  {
+    key: 'iconBusiness',
+    label: 'Icon doanh nghiệp',
+    max: 500_000,
+  },
+
+  {
+    key: 'whyQuote',
+    label: 'Báo giá trước',
+    max: 500_000,
+  },
+  {
+    key: 'whySecure',
+    label: 'Bảo mật thông tin',
+    max: 500_000,
+  },
+  {
+    key: 'whyRemote',
+    label: 'Hỗ trợ từ xa',
+    max: 500_000,
+  },
+
+  {
+    key: 'socialFacebook',
+    label: 'Facebook',
+    max: 500_000,
+  },
+  {
+    key: 'socialYoutube',
+    label: 'YouTube',
+    max: 500_000,
+  },
+  {
+    key: 'socialZalo',
+    label: 'Zalo',
+    max: 500_000,
+  },
+]
