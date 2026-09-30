@@ -1,7 +1,11 @@
 /**
- * Toàn bộ ảnh trên website. Muốn thay ảnh: đổi đường dẫn bên dưới
- * – file nội bộ đặt trong public/images/ (ví dụ '/images/cover.jpg')
- * – hoặc dùng link ngoài (ví dụ 'https://cdn.example.com/cover.jpg').
+ * Toàn bộ ảnh trên website.
+ * Muốn thay ảnh: đổi đường dẫn bên dưới.
+ *
+ * File nội bộ đặt trong public/images/
+ * Ví dụ: '/images/cover.jpg'
+ *
+ * Hoặc có thể dùng URL ảnh bên ngoài.
  */
 
 export const IMAGES = {
@@ -28,16 +32,16 @@ export type ImageKey = keyof typeof IMAGES
 
 /**
  * Ảnh mặc định.
- * Settings.tsx dùng object này khi người dùng chưa upload ảnh tùy chỉnh.
+ * Settings.tsx sử dụng khi chưa có ảnh tùy chỉnh.
  */
 export const DEFAULT_SRC: Record<ImageKey, string> = {
   ...IMAGES,
 }
 
 /**
- * Danh sách ảnh xuất hiện trong trang Settings.
+ * Danh sách ảnh có thể thay đổi trong trang Settings.
  *
- * max = kích thước file tối đa tính theo byte.
+ * max = chiều rộng tối đa của ảnh sau khi resize (pixel).
  */
 export const IMAGE_SLOTS: Array<{
   key: ImageKey
@@ -47,74 +51,74 @@ export const IMAGE_SLOTS: Array<{
   {
     key: 'logoIcon',
     label: 'Logo biểu tượng',
-    max: 500_000,
+    max: 600,
   },
   {
     key: 'logoText',
     label: 'Logo MicroTech',
-    max: 800_000,
+    max: 1200,
   },
   {
     key: 'cover',
     label: 'Ảnh cover',
-    max: 3_000_000,
+    max: 1940,
   },
 
   {
     key: 'iconSupport',
     label: 'Icon hỗ trợ từ xa',
-    max: 500_000,
+    max: 600,
   },
   {
     key: 'iconInstall',
     label: 'Icon cài phần mềm',
-    max: 500_000,
+    max: 600,
   },
   {
     key: 'iconFix',
     label: 'Icon xử lý lỗi',
-    max: 500_000,
+    max: 600,
   },
   {
     key: 'iconIt',
     label: 'Icon IT Support',
-    max: 500_000,
+    max: 600,
   },
   {
     key: 'iconBusiness',
     label: 'Icon doanh nghiệp',
-    max: 500_000,
+    max: 600,
   },
 
   {
     key: 'whyQuote',
     label: 'Báo giá trước',
-    max: 500_000,
+    max: 600,
   },
   {
     key: 'whySecure',
     label: 'Bảo mật thông tin',
-    max: 500_000,
+    max: 600,
   },
   {
     key: 'whyRemote',
     label: 'Hỗ trợ từ xa',
-    max: 500_000,
+    max: 600,
   },
 
   {
     key: 'socialFacebook',
     label: 'Facebook',
-    max: 500_000,
+    max: 300,
   },
   {
     key: 'socialYoutube',
     label: 'YouTube',
-    max: 500_000,
+    max: 300,
   },
   {
     key: 'socialZalo',
     label: 'Zalo',
-    max: 500_000,
+    max: 300,
   },
 ]
