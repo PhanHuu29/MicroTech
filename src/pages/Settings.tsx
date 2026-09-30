@@ -268,7 +268,7 @@ export default function Settings() {
                 sheetUrl: e.target.value,
               })
             }
-            placeholder="https://docs.google.com/spreadsheets/d/..."
+            placeholder="https://docs.google.com/spreadsheets/d/1nw9lZJPmc1eJ33v_hBlNVruvgOD9_vjldQM_ut5X08w/edit?gid=1276365927#gid=1276365927"
           />
         </label>
 
@@ -282,7 +282,7 @@ export default function Settings() {
                 sheetScriptUrl: e.target.value,
               })
             }
-            placeholder="https://script.google.com/macros/s/.../exec"
+            placeholder="https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnTnohXWXe4Hal65yLpevT1mi6fYMaB3BG3lj0bywp6birQyzTSf8tk01mRkB8-e8kmPXLFH1rJJbHI8kvxT_LKYRGWRl67qERYcJQ0LMMb9T7EPBr1rsUpNla6TlDJvyMDXTx-f8-GmTcgtS7h8slXrZrcrrFOE2KeZv5hhtY0CBFrqUgIQxqJILV-9ItoKuNVCsC2KUX05JOxAX2VadkbTOMw8q16Mw0a4ZR04wbdWcGVGDW0Vvz81B-qDGpz4krghvCOl1QmBX43baPXsOKpRTwQD9Q&lib=MuFhVpdHImLX1_gu9NGXca3XB0wd2X8uZ"
           />
         </label>
 

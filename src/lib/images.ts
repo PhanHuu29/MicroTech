@@ -23,9 +23,10 @@ export const IMAGES = {
   whySecure: '/images/why-secure.svg',
   whyRemote: '/images/why-remote.svg',
 
-  socialFacebook: '/images/social-facebook.svg',
+  socialFacebook: '/images/icons8-facebook-100.png',
   socialYoutube: '/images/social-youtube.svg',
   socialZalo: '/images/icons8-zalo-100.png',
+  socialEmail: '/images/icons8-gmail-100.png',
 } as const
 
 export type ImageKey = keyof typeof IMAGES
