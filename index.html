@@ -7,6 +7,13 @@
     <meta name="theme-color" content="#0B1F52" />
     <meta name="description" content="MicroTech – cài đặt phần mềm, xử lý lỗi và hỗ trợ IT từ xa. Đặt hỗ trợ online trong 1 phút." />
     <title>MicroTech – Đặt hỗ trợ IT online trong 1 phút</title>
+    <script>
+      try {
+        const theme = localStorage.getItem('microtech.theme');
+        document.documentElement.dataset.theme = theme === 'light' || theme === 'dark' ? theme : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.lang = localStorage.getItem('microtech.language') === 'en' ? 'en' : 'vi';
+      } catch (_) {}
+    </script>
   </head>
   <body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body>
 </html>

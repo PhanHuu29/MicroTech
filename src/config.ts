@@ -1,21 +1,33 @@
-/** Cấu hình website – chỉnh sửa trực tiếp trong file này. Đường dẫn ảnh nằm ở src/lib/images.ts */
+/**
+ * CẤU HÌNH WEBSITE — CHỈ CHỈNH TRONG FILE NÀY.
+ * Website không có trang Settings và không đọc cấu hình quản trị từ trình duyệt.
+ * Sau khi sửa: chạy pnpm build rồi cập nhật bản triển khai.
+ * Hướng dẫn ngắn: CHEN_LINK_SHEET_VA_API.md.
+ */
 export const CONFIG = {
   brand: 'MicroTech',
   hotline: '0377 339 643',
   email: '',
-  // Liên kết mạng xã hội. Để chuỗi rỗng '' để ẩn icon tương ứng.
   social: {
     facebook: 'https://www.facebook.com/microtech247',
     youtube: '',
     zalo: 'https://zalo.me/0377339643',
     email: 'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox',
   },
-  // Google Sheet: mỗi đơn đặt hỗ trợ sẽ được ghi thêm 1 dòng.
-  // sheetScriptUrl = URL "/exec" của Google Apps Script (xem README). Để rỗng nếu chưa dùng.
-  // Vùng bấm được đặt lên nút "ĐẶT HỖ TRỢ NGAY" vẽ sẵn trong ảnh cover (đơn vị % theo kích thước ảnh).
-  // Đổi ảnh cover thì chỉnh 4 số này cho trùng với nút trong ảnh mới.
-  coverCta: { left: 6, top: 59.8, width: 28.8, height: 12.8 },
-  sheetScriptUrl: 'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnTnohXWXe4Hal65yLpevT1mi6fYMaB3BG3lj0bywp6birQyzTSf8tk01mRkB8-e8kmPXLFH1rJJbHI8kvxT_LKYRGWRl67qERYcJQ0LMMb9T7EPBr1rsUpNla6TlDJvyMDXTx-f8-GmTcgtS7h8slXrZrcrrFOE2KeZv5hhtY0CBFrqUgIQxqJILV-9ItoKuNVCsC2KUX05JOxAX2VadkbTOMw8q16Mw0a4ZR04wbdWcGVGDW0Vvz81B-qDGpz4krghvCOl1QmBX43baPXsOKpRTwQD9Q&lib=MuFhVpdHImLX1_gu9NGXca3XB0wd2X8uZ',
-  sheetUrl: '',            // liên kết tới bảng tính của bạn (dùng cho mục đích tham khảo)
-  showSheetOnSuccess: false, // true = hiện liên kết sheet cho khách sau khi đặt lịch (không khuyến nghị)
+  // [1] API NHẬN ĐƠN: dán URL Ứng dụng web từ hộp triển khai Google Apps Script.
+  // Mẫu: https://script.google.com/macros/s/DEPLOYMENT_ID_CUA_BAN/exec
+  // Không dán link bảng tính, link /dev, link /macros/echo hay API key vào đây.
+  sheetScriptUrl: 'https://script.google.com/macros/s/AKfycbwNSnefgqZ0q8WSaNYNSzjFe1RifxT0YscvCsCHLplLwhidoTi5XxH0kP3vr-knU_imEA/exec',
+
+  // [2] LINK GOOGLE SHEET: dán đường dẫn đầy đủ của bảng tính cá nhân.
+  // Mẫu: https://docs.google.com/spreadsheets/d/ID_SHEET_CUA_BAN/edit
+  sheetUrl: 'https://docs.google.com/spreadsheets/d/1nw9lZJPmc1eJ33v_hBlNVruvgOD9_vjldQM_ut5X08w/edit',
+
+  // [3] HIỆN LINK SAU KHI ĐẶT: true = hiện nút Mở Google Sheet; false = ẩn.
+  // Mục này không ảnh hưởng việc gửi đơn qua API và không tự cấp quyền xem Sheet.
+  showSheetOnSuccess: false,
+
+  // Mặc định cho lần truy cập đầu; khách vẫn có thể đổi ngôn ngữ / sáng-tối.
+  defaultLanguage: 'vi' as 'vi' | 'en',
+  defaultTheme: 'system' as 'light' | 'dark' | 'system',
 }
