@@ -6,6 +6,7 @@ import { Icon } from '../components/Icon'
 import { useTilt } from '../hooks/useTilt'
 import { CONFIG } from '../config'
 import { usePreferences } from '../lib/preferences'
+import { ReviewsPreview } from '../components/Reviews'
 
 const WHY = [
   ['whyQuote', 'Báo giá rõ ràng', 'Clear pricing', 'Xác nhận chi phí trước khi bắt đầu hỗ trợ.', 'Know the cost before your support session starts.'],
@@ -88,5 +89,6 @@ export default function Home() {
         <div className="why">{WHY.map(([key, viTitle, enTitle, viDesc, enDesc], i) => <div key={key} className="glass reveal" style={{ '--i': i } as CSSProperties}><Img k={key} className="why-img" /><div><b>{tr(viTitle, enTitle)}</b><p>{tr(viDesc, enDesc)}</p></div></div>)}</div>
       </div>
     </section>
+    <ReviewsPreview />
   </>
 }

@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { STATUSES } from '../lib/data'
 import { findOrder, orderService, orderUrgency, type Order } from '../lib/orders'
 import { usePreferences } from '../lib/preferences'
@@ -35,6 +35,7 @@ export default function Track() {
         <dt>{tr('Ghi chú kỹ thuật viên', 'Technician notes')}</dt><dd>{order.note ?? tr('Chưa có ghi chú', 'No notes yet')}</dd>
         <dt>{tr('Kết nối hỗ trợ từ xa', 'Remote support link')}</dt><dd>{index >= 2 ? tr('Sẽ gửi qua Zalo/email trước giờ hẹn', 'Sent via Zalo/email before your appointment') : tr('Gửi sau khi xác nhận lịch', 'Sent after your appointment is confirmed')}</dd>
       </dl>
+      <Link to="/reviews#write-review" className="btn btn-ghost">{tr('Đánh giá sau khi sử dụng dịch vụ', 'Review after using the service')}</Link>
     </div>}
   </section>
 }

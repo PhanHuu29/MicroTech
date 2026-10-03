@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Pricing from './pages/Pricing'
 import Booking from './pages/Booking'
 import Track from './pages/Track'
+import Reviews from './pages/Reviews'
 import { SERVICES } from './lib/data'
 import { Img } from './components/Img'
 import { Icon } from './components/Icon'
@@ -62,6 +63,7 @@ export default function App() {
     return () => observer.disconnect()
   }, [pathname])
   const onBooking = pathname.startsWith('/booking')
+  const showBookingFab = !onBooking && !pathname.startsWith('/reviews')
   return <>
     <a href="#content" className="skip">{tr('Đến nội dung chính', 'Skip to content')}</a>
     <Cursor />
@@ -72,6 +74,7 @@ export default function App() {
         <nav id="main-menu" aria-label={tr('Điều hướng chính', 'Main navigation')} className={open ? 'links open' : 'links'}>
           <Link to="/#services" onClick={() => setOpen(false)}>{tr('Dịch vụ', 'Services')}</Link>
           <NavLink to="/pricing">{tr('Bảng giá', 'Pricing')}</NavLink>
+          <NavLink to="/reviews">{tr('Đánh giá', 'Reviews')}</NavLink>
           <NavLink to="/booking">{tr('Đặt hỗ trợ', 'Book support')}</NavLink>
           <NavLink to="/track">{tr('Tra cứu đơn', 'Track request')}</NavLink>
         </nav>
@@ -95,6 +98,7 @@ export default function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/track" element={<Track />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="*" element={<section className="wrap page"><h1>{tr('Không tìm thấy trang', 'Page not found')}</h1><Link className="btn" to="/">{tr('Về trang chủ', 'Back to home')}</Link></section>} />
         </Routes>
       </div>
@@ -103,7 +107,7 @@ export default function App() {
       <div className="wrap foot-in">
         <div className="foot-brand"><Logo /><p>{tr('Giải pháp phần mềm và hỗ trợ IT đáng tin cậy.', 'Reliable software solutions and IT support.')}</p></div>
         <div><h3>{tr('Dịch vụ', 'Services')}</h3>{SERVICES.map((service) => <Link key={service.id} to={`/booking?service=${service.id}`}>{tr(service.title, service.titleEn)}</Link>)}</div>
-        <div><h3>{tr('Hỗ trợ', 'Support')}</h3><Link to="/pricing">{tr('Bảng giá', 'Pricing')}</Link><Link to="/booking">{tr('Đặt hỗ trợ', 'Book support')}</Link><Link to="/track">{tr('Tra cứu đơn', 'Track request')}</Link></div>
+        <div><h3>{tr('Hỗ trợ', 'Support')}</h3><Link to="/pricing">{tr('Bảng giá', 'Pricing')}</Link><Link to="/booking">{tr('Đặt hỗ trợ', 'Book support')}</Link><Link to="/track">{tr('Tra cứu đơn', 'Track request')}</Link><Link to="/reviews">{tr('Đánh giá dịch vụ', 'Service reviews')}</Link></div>
         <div><h3>{tr('Liên hệ', 'Contact')}</h3>
           {CONFIG.hotline && <a className="foot-phone" href={`tel:${CONFIG.hotline.replace(/[^\d+]/g, '')}`}><Icon name="phone" />{CONFIG.hotline}</a>}
           {CONFIG.email && <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>}
@@ -118,6 +122,6 @@ export default function App() {
         <div className="foot-bottom"><span>© {new Date().getFullYear()} {CONFIG.brand}</span></div>
       </div>
     </footer>
-    {!onBooking && (pathname !== '/' || !heroCtaVisible) && <Link to="/booking" className="btn fab"><Icon name="calendar" />{tr('Đặt hỗ trợ ngay', 'Book support now')}<Icon name="arrow" /></Link>}
+    {showBookingFab && (pathname !== '/' || !heroCtaVisible) && <Link to="/booking" className="btn fab"><Icon name="calendar" />{tr('Đặt hỗ trợ ngay', 'Book support now')}<Icon name="arrow" /></Link>}
   </>
 }

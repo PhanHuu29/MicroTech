@@ -1,6 +1,8 @@
 # Hướng dẫn MicroTech – glass, Việt–Anh, sáng/tối và Google Sheet
 
-**Bản 1.1.2: đã điền API `/exec` của bạn và Sheet MicroTech – Support Requests bạn vừa gửi. Cấu hình website chỉ chỉnh trong mã nguồn.** Trang Settings và việc lưu cấu hình quản trị trong trình duyệt đã được bỏ. Xem **`CHEN_LINK_SHEET_VA_API.md`** trước: API thử hiện trả về **401 Unauthorized**, cần sửa quyền triển khai trên Google để khách đặt đơn không phải đăng nhập.
+**Tính năng đánh giá dịch vụ:** xem `HUONG_DAN_DANH_GIA.md` để cập nhật Apps Script và tạo tab Reviews trước khi sử dụng. API đặt đơn đã hoạt động; tính năng đánh giá mới cần triển khai mã Code.gs 1.2.0.
+
+**Bản 1.2.0 đã sửa tên tab nhận đơn: `Support Requests` không có dấu cách đầu/cuối. API `/exec` đã ghi được đơn TEST vào Sheet và dòng dữ liệu đã được đọc lại ngày 03/10/2026.** Cấu hình website chỉ chỉnh trong mã nguồn; trang Settings và việc lưu cấu hình quản trị trong trình duyệt đã được bỏ. Xem **`CHEN_LINK_SHEET_VA_API.md`** để kiểm tra kết nối và dùng hàm `testWriteOrder` khi chạy từ trình chỉnh sửa Apps Script.
 
 ## 1. Những phần đã nâng cấp
 
@@ -35,7 +37,7 @@ Dán link bảng tính vào `sheetScriptUrl` sẽ không ghi được đơn. Ng�
 
 ```js
 const SPREADSHEET_ID = '1nw9lZJPmc1eJ33v_hBlNVruvgOD9_vjldQM_ut5X08w';
-const SHEET_NAME = ' Support Requests'; // giữ một dấu cách ở đầu tên tab
+const SHEET_NAME = 'Support Requests'; // không có dấu cách đầu/cuối
 ```
 
 Chỉ khi đổi sang bảng tính khác mới thay thành:
@@ -44,9 +46,9 @@ Chỉ khi đổi sang bảng tính khác mới thay thành:
 const SPREADSHEET_ID = 'ABC123xyz'; // thay bằng ID THẬT của bạn
 ```
 
-6. Giữ `SHEET_NAME = ' Support Requests'` cho bảng bạn gửi, hoặc thay đúng tên tab đang có nếu đổi bảng. Khi không tìm thấy tab, mã báo lỗi và không tạo tab khác để tránh ghi nhầm chỗ.
+6. Giữ `SHEET_NAME = 'Support Requests'` cho bảng bạn gửi, hoặc thay đúng tên tab đang có nếu đổi bảng. Khi không tìm thấy tab, mã báo lỗi và không tạo tab khác để tránh ghi nhầm chỗ. Lỗi trước đây do tên tab thực tế có một dấu cách đầu trong khi API đang chạy tìm tên không có dấu cách; tên tab đã được sửa cho khớp.
 7. Lưu mã. Trong cài đặt dự án Apps Script và **Tệp → Cài đặt** của Sheet, đặt múi giờ Việt Nam nếu muốn hiển thị giờ Việt Nam; bảng bạn gửi hiện có múi giờ America/Los_Angeles. Định dạng cột B trong Sheet thành ngày và giờ.
-8. Không bấm **Chạy doPost** trực tiếp: hàm cần dữ liệu do website gửi. Kiểm tra bằng một đơn thử trên form `/booking` sau khi chèn API vào mã nguồn.
+8. Để thử ngay trong trình chỉnh sửa, chọn **`testWriteOrder` → Chạy**. Hàm tự cung cấp dữ liệu mẫu, gọi `doPost` và ghi một dòng TEST. Tìm mã `MT-TEST-...` trong Sheet để xác nhận. Chọn trực tiếp `doPost` rồi bấm Chạy sẽ báo `Missing request body` vì chưa có dữ liệu HTTP POST. Sau khi triển khai API, thử thêm một đơn trên form `/booking` để kiểm tra khách chưa đăng nhập gửi được đơn.
 
 Bảng sẽ có 13 cột: Mã đơn, Thời gian, Họ tên, SĐT, Email, Dịch vụ, Thiết bị, HĐH, Mô tả, Lịch, Hình thức, Giá, Trạng thái. Nếu dùng một tab cũ có cột khác thứ tự, đổi sang một tên tab mới trước khi thử.
 
@@ -68,7 +70,7 @@ Khi sửa mã Apps Script sau này, vào quản lý bản triển khai, chọn p
 
 Mở `src/config.ts`. Chỉ thay ba giá trị sau, giữ các mục còn lại:
 
-Bản ZIP đã điền đúng hai link và bật nút mở Sheet. Ví dụ bên dưới chỉ dùng khi bạn đổi sang bảng tính hoặc bản triển khai khác.
+Bản ZIP đã điền đúng hai link; nút mở Sheet hiện được ẩn. Ví dụ bên dưới chỉ dùng khi bạn đổi sang bảng tính hoặc bản triển khai khác.
 
 ```ts
 sheetScriptUrl: 'https://script.google.com/macros/s/DEPLOYMENT_ID_THAT/exec',
@@ -97,7 +99,7 @@ Lưu file, chạy `pnpm.cmd build` rồi cập nhật mã lên Vercel để mọ
 
 Website không còn giao diện hay đường dẫn quản trị Settings. Nút VI/EN và sáng/tối vẫn dành cho khách chọn giao diện, chỉ ghi nhớ ngôn ngữ/theme trên thiết bị của khách.
 
-Để thử kết nối, mở `/booking`, điền một đơn thử đủ bốn bước, bấm xác nhận rồi mở tab **Support Requests** (tên trong mã là ` Support Requests`) trong Google Sheet. Tìm đúng mã đơn được hiển thị trên trang kết quả. Có dòng cùng mã đơn mới xác nhận việc ghi đã thành công.
+Để thử kết nối, mở `/booking`, điền một đơn thử đủ bốn bước, bấm xác nhận rồi mở tab **Support Requests** (không có dấu cách đầu/cuối) trong Google Sheet. Tìm đúng mã đơn được hiển thị trên trang kết quả. Có dòng cùng mã đơn mới xác nhận việc ghi đã thành công.
 
 ## 7. Chèn Zalo và hotline trên cover
 

@@ -1,7 +1,7 @@
 {
   "name": "microtech-web",
   "private": true,
-  "version": "1.1.2",
+  "version": "1.2.0",
   "type": "module",
   "packageManager": "pnpm@9.12.0",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test:sheet": "node --test tests/sheet-script.test.mjs"
+    "test:sheet": "node --test tests/sheet-script.test.mjs tests/reviews-script.test.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "^5.1.0",

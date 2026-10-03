@@ -12,9 +12,9 @@ function harness(configured = true, missingTab = false) {
     getRange: () => ({ setFontWeight() {}, createTextFinder: (code) => ({ matchEntireCell: () => ({ findNext: () => rows.slice(1).some((row) => row[0] === code) ? {} : null }) }) }),
   }
   const context = vm.createContext({
-    console: { error() {} },
-    ContentService: { MimeType: { JSON: 'json' }, createTextOutput: (value) => ({ value, setMimeType() { return this } }) },
-    SpreadsheetApp: { openById: () => { calls.opens++; return { getSheetByName: (name) => { calls.tabs.push(name); return !missingTab && name === ' Support Requests' ? sheet : null } } }, flush: () => calls.flushes++ },
+    console: { error() {}, log() {} },
+    ContentService: { MimeType: { JSON: 'json', JAVASCRIPT: 'javascript' }, createTextOutput: (value) => ({ value, getContent() { return value }, setMimeType() { return this } }) },
+    SpreadsheetApp: { openById: () => { calls.opens++; return { getSheetByName: (name) => { calls.tabs.push(name); return !missingTab && name === 'Support Requests' ? sheet : null } } }, flush: () => calls.flushes++ },
     LockService: { getScriptLock: () => ({ waitLock: () => calls.locks++, releaseLock: () => calls.releases++ }) },
   })
   const spreadsheetId = configured ? 'test-spreadsheet-id' : 'DAN_ID_GOOGLE_SHEET_CUA_BAN'
@@ -32,7 +32,7 @@ test('creates headers and a complete order row, preserving the phone as text', (
   assert.equal(h.rows[1][3], "'" + order.phone)
   assert.equal(h.rows[1][8], order.issue)
   assert.equal(h.rows[1][12], 'Đã nhận yêu cầu')
-  assert.deepEqual(h.calls.tabs, [' Support Requests'])
+  assert.deepEqual(h.calls.tabs, ['Support Requests'])
   assert.equal(h.calls.releases, 1)
 })
 test('retrying the same request does not create another order', () => {
